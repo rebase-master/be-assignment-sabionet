@@ -6,4 +6,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :expenses, foreign_key: :paid_by_id, inverse_of: :paid_by, dependent: :destroy
+  has_many :expense_shares, dependent: :destroy
 end

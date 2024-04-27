@@ -7,6 +7,4 @@ Rails.application.routes.draw do
   root to: 'static#dashboard'
   get 'people/:id', to: 'static#person'
   get 'users', to: 'users#index'
-
 end
-

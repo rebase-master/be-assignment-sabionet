@@ -2614,6 +2614,7 @@ Metrics/BlockLength:
   AllowedPatterns: []
   Exclude:
     - '**/*.gemspec'
+    - 'db/schema.rb'
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting.'
