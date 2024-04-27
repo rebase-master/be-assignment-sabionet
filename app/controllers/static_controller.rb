@@ -1,7 +1,8 @@
-class StaticController < ApplicationController
-  def dashboard
-  end
+# frozen_string_literal: true
 
-  def person
-  end
+# Handles the dashboard
+class StaticController < ApplicationController
+  def dashboard; end
+
+  def person; end
 end

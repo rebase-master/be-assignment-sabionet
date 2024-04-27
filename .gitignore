@@ -38,4 +38,6 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-/config/database.yml
+.idea
+/config/credentials/development.key
+**.DS_Store

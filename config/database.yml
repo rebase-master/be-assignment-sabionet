@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: 5
+  port: 5432
+
+development:
+  <<: *default
+  host: <%= Rails.application.credentials[:database][:development][:host] %>
+  database: <%= Rails.application.credentials[:database][:development][:name] %>
+  username: <%= Rails.application.credentials[:database][:development][:username] %>
+  password: <%= Rails.application.credentials[:database][:development][:password] %>
+
+test:
+  <<: *default
+  host: <%= Rails.application.credentials[:database][:test][:host] %>
+  database: <%= Rails.application.credentials[:database][:test][:name] %>
+  username: <%= Rails.application.credentials[:database][:test][:username] %>
+  password: <%= Rails.application.credentials[:database][:test][:password] %>
+
+production:
+  <<: *default
+  host: <%= Rails.application.credentials[:database][:host] %>
+  database: <%= Rails.application.credentials[:database][:name] %>
+  username: <%= Rails.application.credentials[:database][:username] %>
+  password: <%= Rails.application.credentials[:database][:password] %>

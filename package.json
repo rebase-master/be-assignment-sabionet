@@ -2,11 +2,12 @@
   "name": "be-assignment-junior-1",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@popperjs/core": "^2.10.1",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.4.3",
+    "@rails/webpacker": "^5.4.4",
     "@types/popper.js": "^1.11.0",
     "bootstrap": "^5.1.1",
     "jgrowl": "^1.4.8",
@@ -19,6 +20,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3"
+    "webpack-dev-server": "^3",
+    "@babel/plugin-proposal-private-methods": "*"
   }
 }
