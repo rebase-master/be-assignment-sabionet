@@ -1085,6 +1085,7 @@ Layout/LineLength:
   # any regular expression listed in this option will be ignored by LineLength.
   Exclude:
     - 'config/initializers/devise.rb'
+    - 'config/initializers/simple_form.rb'
   AllowedPatterns: []
 
 Layout/MultilineArrayBraceLayout:
@@ -2046,6 +2047,8 @@ Lint/MissingSuper:
   AllowedParentClasses: []
   VersionAdded: '0.89'
   VersionChanged: '1.4'
+  Exclude:
+    - 'app/services/*'
 
 Lint/MixedCaseRange:
   Description: 'Checks for mixed-case character ranges since they include likely unintended characters.'
@@ -4064,7 +4067,7 @@ Style/HashSyntax:
     # enforces both ruby19 and no_mixed_keys styles
     - ruby19_no_mixed_keys
   # Force hashes that have a hash value omission
-  EnforcedShorthandSyntax: always
+  EnforcedShorthandSyntax: never
   SupportedShorthandSyntax:
     # forces use of the 3.1 syntax (e.g. {foo:}) when the hash key and value are the same.
     - always
