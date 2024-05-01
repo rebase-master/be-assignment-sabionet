@@ -2,6 +2,7 @@
 
 # app/controllers/expenses_controller.rb
 class ExpensesController < ApplicationController
+  # skip_before_action :verify_authenticity_token
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActionController::ParameterMissing, with: :parameter_missing
 

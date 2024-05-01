@@ -2,7 +2,9 @@
 
 # Handles the dashboard
 class StaticController < ApplicationController
-  def dashboard; end
+  def dashboard
+    @user = current_user
+  end
 
   def person; end
 end

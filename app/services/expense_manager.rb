@@ -12,7 +12,7 @@ class ExpenseManager < ApplicationService
 
   def call
     expense = AddExpenseService.call(@params)
-    SplitExpenseService.call(expense, @shares_attributes) if @shares_attributes
     TaxService.call(expense, @tax_attributes) if @tax_attributes
+    SplitExpenseService.call(expense, @shares_attributes) if @shares_attributes
   end
 end

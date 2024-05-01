@@ -2,8 +2,8 @@
   aside.side-bar-area
     .friends-list
       p.friends-list-header FRIENDS
-      a.friend-name anbu
-      a.friend-name barath
+      - my_friends(@user.id).each do |friend|
+        a.friend-name= friend.name
   .main-area
     .top-bar
       h1.top-bar-title Dashboard

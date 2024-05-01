@@ -24,6 +24,6 @@ class SplitExpenseService < ApplicationService
 
   def calculate_share
     total_users = @share_attributes.length + 1 # Including the user who paid
-    @expense.amount / total_users
+    (@expense.amount + @expense.calculate_tax) / total_users
   end
 end

@@ -12,8 +12,6 @@ class TaxService < ApplicationService
   def call
     return if @tax_attributes.blank?
 
-    @tax_attributes.each do |tax|
-      @expense.create_tax(tax)
-    end
+    @expense.create_taxes(@tax_attributes)
   end
 end
