@@ -3,7 +3,7 @@
 # Handles the dashboard
 class StaticController < ApplicationController
   def dashboard
-    @user = current_user
+    @dashboard = Dashboard.new(current_user)
   end
 
   def person; end

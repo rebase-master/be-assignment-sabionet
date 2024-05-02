@@ -8,4 +8,6 @@ class ExpenseShare < ApplicationRecord
   validates :amount,
             presence: true,
             on: :update
+
+  default_scope { where(settled: false) }
 end

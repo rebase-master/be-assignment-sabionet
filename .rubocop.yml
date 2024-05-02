@@ -2618,6 +2618,8 @@ Metrics/BlockLength:
   Exclude:
     - '**/*.gemspec'
     - 'db/schema.rb'
+    - 'spec/models/expense_spec.rb'
+    - 'spec/models/user_spec.rb'
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting.'

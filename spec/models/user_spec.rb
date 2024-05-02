@@ -27,4 +27,59 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
   end
+
+  describe '#friends' do
+    it 'returns the list of friends' do
+      user = Fabricate(:user)
+      friend = Fabricate(:user)
+      expense = Fabricate(:expense, paid_by: user)
+      Fabricate(:expense_share, user: friend, expense: expense)
+
+      expect(User.friends(user.id)).to include(friend)
+    end
+  end
+
+  describe '#debtors' do
+    it 'returns the list of users who owe money' do
+      user = Fabricate(:user)
+      debtor = Fabricate(:user)
+      expense = Fabricate(:expense, paid_by: user)
+      Fabricate(:expense_share, user: debtor, expense: expense, amount: 10.0)
+
+      expect(user.debtors).to include(debtor)
+    end
+  end
+
+  describe '#creditors' do
+    it 'returns the list of users to whom money is owed' do
+      user = Fabricate(:user)
+      creditor = Fabricate(:user)
+      expense = Fabricate(:expense, paid_by: creditor)
+      Fabricate(:expense_share, user: user, expense: expense, amount: 10.0)
+
+      expect(user.creditors.map(&:id)).to include(creditor.id)
+    end
+  end
+
+  describe '#amount_owed_by_you' do
+    it 'returns the total amount owed by the user' do
+      user = Fabricate(:user)
+      expense = Fabricate(:expense, paid_by: user)
+      Fabricate(:expense_share, user: user, expense: expense, amount: 10.0)
+      Fabricate(:expense_share, user: user, expense: expense, amount: 15.0)
+
+      expect(user.amount_owed_by_you).to eq(25.0)
+    end
+  end
+
+  describe '#amount_owed_to_you' do
+    it 'returns the total amount owed to the user' do
+      user = Fabricate(:user)
+      expense = Fabricate(:expense, paid_by: user)
+      Fabricate(:expense_share, user: user, expense: expense, amount: 10.0)
+      Fabricate(:expense_share, user: user, expense: expense, amount: 15.0)
+
+      expect(user.amount_owed_to_you).to eq(25.0)
+    end
+  end
 end

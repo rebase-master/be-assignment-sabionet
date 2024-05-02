@@ -29,6 +29,7 @@ RSpec.describe Expense, type: :model do
         expect(expense.split_amount).to eq(0)
       end
     end
+
     describe '#calculate_tax' do
       it 'calculates the total tax amount correctly' do
         expense = Fabricate(:expense, amount: 100, paid_by: user)
