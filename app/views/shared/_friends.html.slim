@@ -1,0 +1,2 @@
+- my_friends(user_id).each do |friend|
+  = link_to friend.name, person_path(id: friend.id), class: 'friend-name'

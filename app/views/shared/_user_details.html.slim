@@ -2,5 +2,5 @@
 .user-detail
   img.user-img alt="profile" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" /
   .user-info
-    p =user.name
+    = link_to user.name, person_path(id: user.id)
     p #{text} #{formatted_amount}

@@ -2,10 +2,11 @@
 
 # Dashboard
 class Dashboard
-  attr_accessor :user
+  attr_accessor :user, :current_user
 
-  def initialize(user)
+  def initialize(user, current_user)
     @user = user
+    @current_user = current_user
   end
 
   def you_owe
@@ -30,5 +31,9 @@ class Dashboard
 
   def all_users
     User.select(:id, :name)
+  end
+
+  def user_expenses
+    @user.fetch_expenses(@user.id, @current_user.id)
   end
 end

@@ -1,0 +1,11 @@
+.expense-item
+  .item-lhs
+    p =expense.created_at.strftime("%b %d")
+    p =expense.description
+  .item-rhs
+    .you-details
+      p #{expense.paid_by_id == current_user.id ? 'you paid' : user.name + ' paid'}
+      p =number_to_currency(expense.amount)
+    .you-details
+      p #{expense.paid_by_id == current_user.id ? 'you lent' : 'you borrowed'}
+      p =number_to_currency(expense.share)

@@ -19,8 +19,7 @@ class User < ApplicationRecord
   end
 
   def debtors
-    User.joins(expense_shares: :expense)
-        .where(expenses: { paid_by_id: id })
+    User.joins(expense_shares: :expense).where(expenses: { paid_by_id: id })
         .group('users.id')
         .select('users.name, users.id, SUM(expense_shares.amount) AS total_amount')
         .having('SUM(expense_shares.amount) > 0')
@@ -31,6 +30,16 @@ class User < ApplicationRecord
                 .where(user_id: id)
                 .group('users.id, users.name')
                 .select('users.id, users.name, SUM(expense_shares.amount) AS total_amount')
+  end
+
+  def fetch_expenses(user_id, current_user_id)
+    Expense.select('expenses.id, expenses.description, expenses.amount, expenses.paid_by_id, expense_shares.user_id,
+                   expense_shares.amount AS share, expenses.created_at')
+           .joins(:expense_shares)
+           .where('((expenses.paid_by_id = ? AND expense_shares.user_id = ?) OR
+                  (expenses.paid_by_id = ? AND expense_shares.user_id = ?))
+                  AND expense_shares.amount IS NOT NULL', user_id, current_user_id, current_user_id, user_id)
+           .group('expenses.id, expense_shares.user_id, expenses.description, expenses.amount, expense_shares.amount')
   end
 
   def amount_owed_by_you
