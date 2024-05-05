@@ -2,17 +2,19 @@
 
 # app/services/expense_manager.rb
 class ExpenseManager < ApplicationService
-  attr_reader :params, :share_attributes, :tax_attributes
+  attr_reader :params, :share_attributes, :taxes_attributes
 
   def initialize(params)
     @params = params
-    @shares_attributes = params.fetch(:shares_attributes, nil)
-    @tax_attributes = params.fetch(:tax_attributes, nil)
+    @shares_attributes = params.fetch(:expense_share_ids, nil)
+    @taxes_attributes = params.fetch(:taxes_attributes, nil)
   end
 
   def call
-    expense = AddExpenseService.call(@params)
-    TaxService.call(expense, @tax_attributes) if @tax_attributes
-    SplitExpenseService.call(expense, @shares_attributes) if @shares_attributes
+    ActiveRecord::Base.transaction do
+      expense = AddExpenseService.call(@params)
+      TaxService.call(expense, @taxes_attributes) if @taxes_attributes
+      SplitExpenseService.call(expense, @shares_attributes)
+    end
   end
 end

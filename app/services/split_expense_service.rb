@@ -10,13 +10,11 @@ class SplitExpenseService < ApplicationService
   end
 
   def call
-    return if @share_attributes.blank?
-
     individual_share = calculate_share
-    @share_attributes.each do |share|
+    @share_attributes.each do |share_id|
       @expense
         .expense_shares
-        .create(user_id: share['user_id'].to_i, amount: individual_share)
+        .create!(user_id: share_id, amount: individual_share)
     end
   end
 

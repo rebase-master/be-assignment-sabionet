@@ -6,13 +6,15 @@ class Expense < ApplicationRecord
   has_many :expense_shares, dependent: :destroy
   has_many :taxes, dependent: :destroy
 
+  accepts_nested_attributes_for :taxes
+
   validates :description,
             presence: true
   validates :amount,
             presence: true,
             numericality: { greater_than: 0 }
 
-  accepts_nested_attributes_for :taxes
+  validates_associated :expense_shares
 
   def split_amount
     total_shares = expense_shares.sum(:amount)
@@ -24,13 +26,13 @@ class Expense < ApplicationRecord
   end
 
   def create_taxes(tax_attributes)
-    tax_attributes.each do |tax|
-      taxes.create(name: tax['name'], amount: tax['amount'])
+    tax_attributes.each_value do |tax|
+      taxes.create!(name: tax['name'], amount: tax['amount'].to_f)
     end
   end
 
   def self.create_expense(amount, description, user)
-    create(
+    create!(
       amount: amount,
       description: description,
       paid_by: user

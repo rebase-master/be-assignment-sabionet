@@ -1086,6 +1086,7 @@ Layout/LineLength:
   Exclude:
     - 'config/initializers/devise.rb'
     - 'config/initializers/simple_form.rb'
+    - 'config/initializers/simple_form_bootstrap.rb'
   AllowedPatterns: []
 
 Layout/MultilineArrayBraceLayout:
@@ -2620,6 +2621,7 @@ Metrics/BlockLength:
     - 'db/schema.rb'
     - 'spec/models/expense_spec.rb'
     - 'spec/models/user_spec.rb'
+    - 'config/initializers/simple_form_bootstrap.rb'
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting.'

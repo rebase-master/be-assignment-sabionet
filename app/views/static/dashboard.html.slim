@@ -32,14 +32,4 @@
           - @dashboard.debtors.each do |debtor|
             = render 'shared/user_details', user: debtor, text: 'owes you'
 
-#expenseModal.modal.fade aria-hidden="true" aria-labelledby="expenseModalLabel" tabindex="-1" 
-  .modal-dialog
-    .modal-content
-      .modal-header
-        h5#expenseModalLabel.modal-title Add an expense
-        button.btn-close aria-label="Close" data-bs-dismiss="modal" type="button" 
-      .modal-body
-        | Fields to be added
-      .modal-footer
-        button.btn.btn-secondary data-bs-dismiss="modal" type="button"  Close
-        button.btn.btn-primary type="button"  Save changes
+= render 'shared/add_expense_modal'

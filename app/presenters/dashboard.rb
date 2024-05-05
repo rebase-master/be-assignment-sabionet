@@ -27,4 +27,8 @@ class Dashboard
   def creditors
     @user.creditors
   end
+
+  def all_users
+    User.select(:id, :name)
+  end
 end

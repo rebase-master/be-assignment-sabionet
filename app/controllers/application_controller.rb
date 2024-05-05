@@ -4,10 +4,18 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
-  def render_404(message) # rubocop:disable Naming/VariableNumber
+  def render_404(_message, errors) # rubocop:disable Naming/VariableNumber
     respond_to do |format|
       format.html { render template: 'errors/not_found', formats: :html, layout: 'application', status: :not_found }
-      format.json { render json: message, status: :not_found, content_type: 'application/json' }
+      format.json { render json: { error: errors }, status: :not_found, content_type: 'application/json' }
+      format.any { head :not_found }
+    end
+  end
+
+  def render_522(_message, errors) # rubocop:disable Naming/VariableNumber
+    respond_to do |format|
+      format.html { render template: 'errors/not_found', formats: :html, layout: 'application', status: :not_found }
+      format.json { render json: { error: errors }, status: :not_found, content_type: 'application/json' }
       format.any { head :not_found }
     end
   end

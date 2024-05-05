@@ -7,7 +7,7 @@ class AddExpenseService < ApplicationService
   def initialize(expense_params)
     @amount = expense_params.fetch(:amount, nil)
     @description = expense_params.fetch(:description, nil)
-    @user = User.find(expense_params.fetch(:paid_by, 0))
+    @user = User.find(expense_params.fetch(:paid_by_id, 0))
   end
 
   def call

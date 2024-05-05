@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   root to: 'static#dashboard'
   get 'people/:id', to: 'static#person'
   get 'users', to: 'users#index'
-  post 'expense', to: 'expenses#create'
+  post 'expenses', to: 'expenses#create'
 end
