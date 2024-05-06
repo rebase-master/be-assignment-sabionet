@@ -8,11 +8,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Fabricate.times(10, :user)
+Fabricate.times(10, :user) if Rails.env.development?
 
 # Create sample users
-user1 = User.find(1).update(password: 'DSW*34hbE$Rt')
-user2 = User.find(2).update(password: 'DsW@34KpE$Rt')
+User.create!(name: 'John Doe', email: 'john@example.com', password: 'DSW*34hbE$Rt')
+User.create!(name: 'Jane Doe', email: 'jane@example.com', password: 'DSW*34hbE$Rt')
+User.create!(name: 'Janet Doe', email: 'janet@example.com', password: 'DdW*34hbE$Rt')
+User.create!(name: 'Jim Doe', email: 'jim@example.com', password: 'DSW*64hbE$Rt')
+User.create!(name: 'Joel Doe', email: 'joel@example.com', password: 'DSw*34hbE$Rt')
 
 # Create sample expenses
 # expense1 = Expense.create(description: 'Dinner', amount: 100, paid_by: user1)
