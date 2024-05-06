@@ -7,6 +7,7 @@ ruby '3.1.2'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
+gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.7'
 gem 'net-smtp', require: false
 gem 'pg'
