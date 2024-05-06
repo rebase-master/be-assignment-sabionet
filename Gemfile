@@ -10,6 +10,8 @@ gem 'devise'
 gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.7'
 gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 gem 'pg'
 gem 'puma', '~> 6.0'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
