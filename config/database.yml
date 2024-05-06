@@ -7,17 +7,17 @@ default: &default
 
 development:
   <<: *default
-  host: <%= Rails.application.credentials[:database][:development][:host] %>
-  database: <%= Rails.application.credentials[:database][:development][:name] %>
-  username: <%= Rails.application.credentials[:database][:development][:username] %>
-  password: <%= Rails.application.credentials[:database][:development][:password] %>
+  host: localhost
+  database: splitwise_development
+  username: sw_user
+  password: ENV['DEV_DB_PASSWORD']
 
 test:
   <<: *default
-  host: <%= Rails.application.credentials[:database][:test][:host] %>
-  database: <%= Rails.application.credentials[:database][:test][:name] %>
-  username: <%= Rails.application.credentials[:database][:test][:username] %>
-  password: <%= Rails.application.credentials[:database][:test][:password] %>
+  host: localhost
+  database: splitwise_test
+  username: sw_user
+  password: ENV['DEV_DB_PASSWORD']
 
 production:
   <<: *default
