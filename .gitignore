@@ -43,3 +43,6 @@ yarn-debug.log*
 **.DS_Store
 
 /config/credentials/test.key
+
+/config/credentials/production.key
+.env
