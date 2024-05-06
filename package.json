@@ -2,6 +2,7 @@
   "name": "be-assignment-junior-1",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-methods": "*",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@popperjs/core": "^2.10.1",
     "@rails/actioncable": "^6.0.0",
