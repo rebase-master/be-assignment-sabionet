@@ -13,6 +13,11 @@ class ExpensesController < ApplicationController
     render json: { status: 'Expense successfully added.' }, status: :ok
   end
 
+  def settle
+    current_user.settle_expenses(params[:user_id])
+    render json: { status: 'Expense successfully settled.' }, status: :ok
+  end
+
   private
 
   def parameter_missing(exception)

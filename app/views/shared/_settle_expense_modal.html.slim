@@ -1,0 +1,17 @@
+#settlementModal.modal.fade aria-hidden="true" aria-labelledby="settlementModalLabel" tabindex="-1"
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        h5#settlementModalLabel.modal-title Settle Up
+        button.btn-close aria-label="Close" data-bs-dismiss="modal" type="button"
+      .modal-body
+        .row
+          #ajax-errors.alert.alert-danger.d-none
+        - amount_owed = @dashboard.you_owe_to_this_person
+        - if @dashboard.you_owe_to_this_person.blank?
+          p You are all caught up. Nothing owed.
+        - else
+          .row
+            p You owe #{user.name} an amount of #{number_to_currency(amount_owed)}
+          .modal-footer
+            button#settle-expense.btn.btn-primary.mt-4 data-id="#{user.id}" Pay now

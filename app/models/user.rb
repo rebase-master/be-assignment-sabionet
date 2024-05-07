@@ -10,12 +10,18 @@ class User < ApplicationRecord
   has_many :expenses, foreign_key: :paid_by_id, inverse_of: :paid_by, dependent: :destroy
   has_many :expense_shares, dependent: :destroy
 
-  def self.friends(user_id)
-    where(id: ExpenseShare.select(:user_id)
-                           .joins(:expense)
-                           .where(expenses: { paid_by_id: user_id })
-                           .distinct)
-      .where.not(id: user_id)
+  def settle_expenses(user_id)
+    ExpenseShare
+      .unscoped
+      .where(expense_id: Expense.where(paid_by_id: user_id).pluck(:id), user_id: id)
+      .update_all(settled: true)
+  end
+
+  def amount_borrowed_from(user_id)
+    Expense.joins(:expense_shares)
+           .where(expenses: { paid_by_id: user_id })
+           .where(expense_shares: { user_id: id })
+           .pick('SUM(expense_shares.amount)')
   end
 
   def debtors
@@ -49,5 +55,13 @@ class User < ApplicationRecord
   def amount_owed_to_you
     total_shared = ExpenseShare.joins(:expense).where(expenses: { paid_by_id: id }).sum(:amount)
     total_shared.to_f.round(2)
+  end
+
+  def self.friends(user_id)
+    where(id: ExpenseShare.select(:user_id)
+                          .joins(:expense)
+                          .where(expenses: { paid_by_id: user_id })
+                          .distinct)
+      .where.not(id: user_id)
   end
 end

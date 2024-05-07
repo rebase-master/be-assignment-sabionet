@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get 'people/:id', to: 'static#person', as: 'person'
   get 'users', to: 'users#index'
   post 'expenses', to: 'expenses#create'
+  post 'settle/:user_id', to: 'expenses#settle'
 end
