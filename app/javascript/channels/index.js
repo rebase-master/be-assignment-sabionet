@@ -16,7 +16,7 @@ $(document).ready(function() {
             success: function(response) {
                 alert(response.status);
                 $('#settlementModal').modal('hide'); // Hide the modal
-                location.reload();
+                window.location.reload(true);
             },
             error: function(xhr, status, error) {
                 if (xhr.responseJSON && xhr.responseJSON.error) {
@@ -56,7 +56,7 @@ $(document).ready(function() {
                 alert('Expense successfully added.'); // Display success message
                 $('#expenseModal').modal('hide'); // Hide the modal
                 $form[0].reset();
-                location.reload();
+                window.location.reload(true);
             },
             error: function(xhr, status, error) {
                 if (xhr.responseJSON && xhr.responseJSON.error) {
