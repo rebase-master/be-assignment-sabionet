@@ -9,6 +9,12 @@ class Dashboard
     @current_user = current_user
   end
 
+  def you_owe_to_this_person
+    return 0.00 if @user == @current_user
+
+    @current_user.amount_borrowed_from(@user)
+  end
+
   def you_owe
     @user.amount_owed_by_you
   end
@@ -33,7 +39,7 @@ class Dashboard
 
   # TODO: If user base grows, add pagination here
   def all_users
-    User.select(:id, :name)
+    User.where.not(name: nil).select(:id, :name)
   end
 
   def user_expenses

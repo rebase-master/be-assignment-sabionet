@@ -8,8 +8,9 @@
       h1.top-bar-title =@dashboard.user.name
       .top-bar-actions
         button.btn.btn-primary type="button" data-bs-toggle="modal" data-bs-target="#expenseModal"  Add an expense
-        button.btn.btn-secondary type="button"  Settle up
+        button.btn.btn-secondary type="button" data-bs-toggle="modal" data-bs-target="#settlementModal"  Settle up
     .expenses-list
       - @dashboard.user_expenses.each do |expense|
         = render 'shared/expense_item', expense: expense, user: @dashboard.user, current_user: @dashboard.current_user
 = render 'shared/add_expense_modal'
+= render 'shared/settle_expense_modal', user: @dashboard.user

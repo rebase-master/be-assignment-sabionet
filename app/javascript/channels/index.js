@@ -8,6 +8,39 @@ channels.keys().forEach(channels)
 // Place this in your application.js or a separate JavaScript file
 
 $(document).ready(function() {
+    $('#settle-expense').on('click', function (event) {
+        $.ajax({
+            url: '/settle/' + parseInt($(this).data('id')),
+            method: 'POST',
+            dataType: 'json', // Expect JSON response
+            success: function(response) {
+                alert(response.status);
+                $('#settlementModal').modal('hide'); // Hide the modal
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    let errors = xhr.responseJSON.error;
+                    let errorMessage = "<ul>"
+                    if (typeof errors === 'object') {
+                        Object.keys(errors).forEach(function(key) {
+                            errorMessage += "<li><strong>" + key + ":</strong> " + errors[key] + "</li>"
+                            console.log('Key : ' + key + ', Value : ' + errors[key])
+                        });
+                    } else {
+                        errorMessage += "<li>"+errors+"</li>"
+                    }
+                    errorMessage += "</ul>";
+
+                    $('#ajax-errors').html(errorMessage).removeClass('d-none');
+                } else {
+                    $('#ajax-errors').text('An error occurred. Please try again.').removeClass('d-none');
+                }
+            }
+        });
+
+    });
+
     $('form').on('submit', function(event) {
         event.preventDefault();
         let $form = $(this);
