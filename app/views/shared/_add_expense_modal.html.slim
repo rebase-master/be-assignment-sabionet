@@ -1,7 +1,7 @@
 #expenseModal.modal.fade aria-hidden="true" aria-labelledby="expenseModalLabel" tabindex="-1" 
   .modal-dialog.modal-lg
     .modal-content
-      = simple_form_for @expense do |f|
+      = simple_form_for @expense, html: { id: 'new-expense-form'} do |f|
         .modal-header
           h5#expenseModalLabel.modal-title Add an expense
           button.btn-close aria-label="Close" data-bs-dismiss="modal" type="button" 

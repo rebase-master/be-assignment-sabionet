@@ -9,7 +9,7 @@
           #ajax-errors.alert.alert-danger.d-none
         - amount_owed = @dashboard.you_owe_to_this_person
         - if @dashboard.you_owe_to_this_person.blank?
-          p You are all caught up. Nothing owed.
+          p All clear. Nothing owed.
         - else
           .row
             p You owe #{user.name} an amount of #{number_to_currency(amount_owed)}
