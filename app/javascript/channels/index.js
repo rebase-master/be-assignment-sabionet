@@ -4,9 +4,6 @@
 const channels = require.context('.', true, /_channel\.js$/)
 channels.keys().forEach(channels)
 
-
-// Place this in your application.js or a separate JavaScript file
-
 $(document).ready(function() {
     $('#settle-expense').on('click', function (event) {
         $.ajax({
@@ -41,7 +38,7 @@ $(document).ready(function() {
 
     });
 
-    $('form').on('submit', function(event) {
+    $('#new-expense-form').on('submit', function(event) {
         event.preventDefault();
         let $form = $(this);
         let ele = $form.find('input[type="submit"]');

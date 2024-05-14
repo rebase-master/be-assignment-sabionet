@@ -1,5 +1,5 @@
 h1.h3.mb-3.fw-normal Please sign in
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "ulsa-login-form", autocomplete: "off"}) do |f|
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "sign_in_form", class: "ulsa-login-form disable-turbolinks-ajax", autocomplete: "off"}) do |f|
   .form-group.mb-4
     .form-floating
       = f.input :email, input_html: { autocomplete: 'off', class: 'form-control', id: 'floatingInput' }, label: false, wrapper: false
@@ -9,3 +9,32 @@ h1.h3.mb-3.fw-normal Please sign in
       label for="floatingPassword" Password
 
     = f.button :button, "Log in", class: "w-100 btn btn-lg btn-primary", data: {class_name: 'ulsa-login-form', button_name: "Log in"}
+
+javascript:
+  document.addEventListener('turbolinks:load', function () {
+      document.getElementById('sign_in_form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      var formData = new FormData(this);
+      fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+      })
+      .then(response => {
+        if (!response.ok) {
+            console.log(response)
+        }
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+      )
+      .then(data => {
+          Turbolinks.clearCache();
+          Turbolinks.visit(data.redirect_url, {action: 'replace'});
+      });
+    });
+  });
